@@ -1,27 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Tweats</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Tweat</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tweats.each do |tweat| %>
-      <tr>
-        <td><%= tweat.tweat %></td>
-        <td><%= link_to 'Show', tweat %></td>
-        <td><%= link_to 'Edit', edit_tweat_path(tweat) %></td>
-        <td><%= link_to 'Destroy', tweat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Tweat', new_tweat_path %>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <%= render 'feed' %>
+      <%= render 'who-to-follow' %>
+    </div>
+  </div>
+</section>

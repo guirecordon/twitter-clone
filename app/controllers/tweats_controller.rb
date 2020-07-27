@@ -4,7 +4,7 @@ class TweatsController < ApplicationController
   # GET /tweats
   # GET /tweats.json
   def index
-    @tweats = Tweat.all
+    @tweats = Tweat.all.order("created_at DESC")
   end
 
   # GET /tweats/1
