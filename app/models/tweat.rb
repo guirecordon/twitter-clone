@@ -1,0 +1,2 @@
+class Tweat < ApplicationRecord
+end
