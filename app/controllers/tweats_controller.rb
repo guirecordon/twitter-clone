@@ -5,6 +5,7 @@ class TweatsController < ApplicationController
   # GET /tweats.json
   def index
     @tweats = Tweat.all.order("created_at DESC")
+    @tweat = Tweat.new
   end
 
   # GET /tweats/1
@@ -28,7 +29,7 @@ class TweatsController < ApplicationController
 
     respond_to do |format|
       if @tweat.save
-        format.html { redirect_to @tweat, notice: 'Tweat was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Tweat was successfully created.' }
         format.json { render :show, status: :created, location: @tweat }
       else
         format.html { render :new }
