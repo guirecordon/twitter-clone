@@ -1,5 +1,6 @@
 class TweatsController < ApplicationController
   before_action :set_tweat, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /tweats
   # GET /tweats.json
@@ -15,7 +16,7 @@ class TweatsController < ApplicationController
 
   # GET /tweats/new
   def new
-    @tweat = Tweat.new
+    @tweat = current_user.tweats.build
   end
 
   # GET /tweats/1/edit
@@ -25,11 +26,11 @@ class TweatsController < ApplicationController
   # POST /tweats
   # POST /tweats.json
   def create
-    @tweat = Tweat.new(tweat_params)
+    @tweat = current_user.tweats.build(tweat_params)
 
     respond_to do |format|
       if @tweat.save
-        format.html { redirect_to root_path, notice: 'Tweat was successfully created.' }
+        format.html { redirect_to root_path, notice: 'tweat was successfully created.' }
         format.json { render :show, status: :created, location: @tweat }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class TweatsController < ApplicationController
   def update
     respond_to do |format|
       if @tweat.update(tweat_params)
-        format.html { redirect_to @tweat, notice: 'Tweat was successfully updated.' }
+        format.html { redirect_to @tweat, notice: 'tweat was successfully updated.' }
         format.json { render :show, status: :ok, location: @tweat }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class TweatsController < ApplicationController
   def destroy
     @tweat.destroy
     respond_to do |format|
-      format.html { redirect_to tweats_url, notice: 'Tweat was successfully destroyed.' }
+      format.html { redirect_to tweats_url, notice: 'tweat was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -68,7 +69,7 @@ class TweatsController < ApplicationController
       @tweat = Tweat.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # Never trust parameters from the scary internet, only allow the white list through.
     def tweat_params
       params.require(:tweat).permit(:tweat)
     end

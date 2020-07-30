@@ -1,30 +1,33 @@
 <div class="column is-half">
-  <article class="media box">
-    <figure class="media-left">
-      <p class="image is-64x64">
-        <img src="https://bulma.io/images/placeholders/64x64.png">
-      </p>
-    </figure>
-    <div class="media-content">
-        <%= render 'tweats/form' %>
-    </div>
-  </article>
+  <% if user_signed_in? %>
+    <article class="media box">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
+        </p>
+      </figure>
+      <div class="media-content">
+          <%= render 'tweats/form' %>
+      </div>
+    </article>
+    <% end %>
 
 <% @tweats.each do |tweat| %>
   <div class="box">
     <article class="media">
       <div class="media-left">
         <figure class="image is-64x64">
-          <img src="https://bulma.io/images/placeholders/64x64.png">
+          <%= gravatar_image_tag(tweat.user.email, size: 64, alt: tweat.user.name) %>
         </figure>
       </div>
       <div class="media-content">
         <div class="content">
-          <strong>Gui Recordon</strong><br />
-          <small>@guirecordon</small><br />
+          <strong><%= tweat.user.name %></strong><br />
+          <small><%= tweat.user.username %></small><br />
           <p> <%= tweat.tweat %></p>
         </div>
       </div>
+      <% if user_signed_in? %>
       <nav class="level">
         <div class="level-left is-mobile">
           <%= link_to tweat, class: "level-item" do %>
@@ -38,6 +41,7 @@
           <% end %>
         </div>
       </nav>
+      <% end %>
     </article>
   </div>
 <% end %>
