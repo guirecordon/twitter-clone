@@ -1,1 +1,1 @@
-# Twitter like website build using Ruby on Rails
+# Twitter like website built using Ruby on Rails
